@@ -35,9 +35,12 @@ class ProductoController extends Controller
         $request->merge([
             'urlImg' => $name,
         ]);
-        $usaurio= Producto::create($request->all());
+        $producto= Producto::create($request->all());
+        //session()->flash('success',"El producto {$producto->strNombre} se creo con exito");
+
        // return $usaurio;
-       return redirect()->route('productos.index');
+       return redirect()->back()->withSuccess("El producto {$producto->strNombre} se creo con exito");
+
     }
 
     public function update($producto){
@@ -53,7 +56,9 @@ class ProductoController extends Controller
          }
          
           $producto->update(request()->all());
-          return redirect()->route('productos.index');
+        //  session()->flash('success',"El producto {$producto->strNombre} se actualizo con exito");
+          
+          return redirect()->route('productos.index')->withSuccess("El producto {$producto->strNombre} se actualizo con exito");
     }
     
     public function edit($producto){
@@ -64,8 +69,9 @@ class ProductoController extends Controller
     public function destroy($producto){
         $producto=Producto::findOrFail($producto);
         $producto->delete();
-        return redirect()->route('producto.index');
+        //session()->flash('success',"El Producto  {$producto->strNombre} se elimino con exito");
 
+        return redirect()->route('productos.index')->withSuccess("El Producto  {$producto->strNombre} se elimino con exito");
     }
     
 }

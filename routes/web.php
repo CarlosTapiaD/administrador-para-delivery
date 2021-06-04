@@ -81,3 +81,7 @@ Route::match(['put','patch'],'pedidos/{pedido}','PedidoController@update')->name
 Route::delete('pedidos/{pedido}','PedidoController@destroy')->name('pedidos.destroy');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

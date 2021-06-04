@@ -27,7 +27,7 @@ class CategoriaController extends Controller
         // if(request()->intVisible=='1'){
         //    // session()->put('error','error de visibilidad');
         //     session()->flash('error','error de visibilidad');
-        //     return redirect()->back();
+        //     return redirect()->back()->withInput(request()->all())-> withErrors('');
         // }
        // session()->forget('error');//elimina el error 
         $request->validate([
@@ -39,10 +39,14 @@ class CategoriaController extends Controller
         $request->merge([
             'urlImg' => $name,
         ]);
-        $usaurio= Categoria::create($request->all());
+        $categoria= Categoria::create($request->all());
+        //session()->flash('success',"La categoria {$categoria->strNombre} se creo con exito");
+
        // return $usaurio;
        //return view('categoria.create');
-       return redirect()->back();
+       return redirect()
+       ->back()
+       ->withSuccess("La categoria {$categoria->strNombre} se creo con exito");
     //    return redirect()->action('');//aqui va un controaldor controlador@funcion
     //    return redirect()->route('categoria.index');
     }
@@ -60,9 +64,12 @@ class CategoriaController extends Controller
         }
         
          $categoria->update(request()->all());
+         //session()->flash('success',"La categoria {$categoria->strNombre} se actualizo con exito");
+
         //return view('categoria.index');
-        return redirect()->back();
+        return redirect()->route('categoria.index')->withSuccess("La categoria {$categoria->strNombre} se actualizo con exito");
     }
+
     
     public function edit($categoria){
         $categoria=Categoria::findOrFail($categoria);
@@ -71,7 +78,9 @@ class CategoriaController extends Controller
     public function destroy($categoria){
         $categoria=Categoria::findOrFail($categoria);
         $categoria->delete();
-        return redirect()->route('categoria.index');
+     //   session()->flash('success',"La categoria {$categoria->strNombre} se elimino con exito");
+
+        return redirect()->route('categoria.index')->withSuccess("La categoria {$categoria->strNombre} se elimino con exito");
     }
     
     
