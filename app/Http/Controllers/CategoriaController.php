@@ -7,6 +7,11 @@ use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
 class CategoriaController extends Controller
 {
+    public function __construct(){
+        // $this->middleware('auth')->only('index');
+        // $this->middleware('auth')->except(['index','create']);
+        $this->middleware('auth');
+    }
     
     function index() {
         $categorias=Categoria::all()->sortByDesc("id");;
@@ -18,10 +23,10 @@ class CategoriaController extends Controller
     public function create(){
         return view('categoria.create');
     }
-    public function show($categoria){
-        $categorias=Categoria::findOrFail($categoria);
+    public function show(Categoria $categoria){
+       // $categorias=Categoria::findOrFail($categoria);
        // dd($categorias);
-        return view('categoria.show')->with(['categorias'=>$categorias]); 
+        return view('categoria.show')->with(['categorias'=>$categoria]); 
     }
     public function store(Request $request){
         // if(request()->intVisible=='1'){
@@ -51,8 +56,8 @@ class CategoriaController extends Controller
     //    return redirect()->route('categoria.index');
     }
 
-    public function update($categoria){
-        $categoria=Categoria::findOrFail($categoria);
+    public function update( Categoria $categoria){
+       // $categoria=Categoria::findOrFail($categoria);
        // dd(request()->file('urlImg2'));
         if (request()->file('urlImg2')!=null) {
             request()->validate([
@@ -71,12 +76,12 @@ class CategoriaController extends Controller
     }
 
     
-    public function edit($categoria){
-        $categoria=Categoria::findOrFail($categoria);
+    public function edit(Categoria $categoria){
+       // $categoria=Categoria::findOrFail($categoria);
         return view('categoria.edit')->with(['categoria'=>$categoria]);
     }
-    public function destroy($categoria){
-        $categoria=Categoria::findOrFail($categoria);
+    public function destroy(Categoria $categoria){
+        //$categoria=Categoria::findOrFail($categoria);
         $categoria->delete();
      //   session()->flash('success',"La categoria {$categoria->strNombre} se elimino con exito");
 

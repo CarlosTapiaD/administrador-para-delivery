@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ">{{--navbar-text--}}
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -76,27 +76,30 @@
         </nav>
 
         <main class="py-4">
-            @if (session()->has('error'))
-            <div class="alert alert-danger">
-                {{session()->get('error')}}
+            <div class="container-fluid">
+                @if (session()->has('error'))
+                <div class="alert alert-danger">
+                    {{session()->get('error')}}
+                </div>
+            @endif
+        
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{session()->get('success')}}
+                </div>
+            @endif
+            @if (isset($errors) && $errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li> {{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+                @yield('content')
             </div>
-        @endif
-    
-        @if (session()->has('success'))
-            <div class="alert alert-success">
-                {{session()->get('success')}}
-            </div>
-        @endif
-        @if (isset($errors) && $errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li> {{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-            @yield('content')
+           
         </main>
     </div>
 </body>

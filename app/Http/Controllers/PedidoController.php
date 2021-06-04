@@ -7,6 +7,9 @@ use App\Models\Pedido;
 use Illuminate\Support\Facades\DB;
 class PedidoController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index(){
         $pedidos=Pedido::all();
       //  dd($pedidos);

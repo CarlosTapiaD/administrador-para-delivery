@@ -28,16 +28,19 @@
           </select>
     </div>
 
-    <div class="form-row">
+    <div class="form-row mb-3">
         <label for="intVisible">Disponible</label>
         <select name="intVisible" class="custom-select">
             <option value="1" {{$producto->intVisible=='1' ? 'selected' :''}}>Si</option>
             <option value="0"  {{$producto->intVisible=='0' ? 'selected' :''}}>No</option>
           </select>
     </div>
-    <div class="form-row">
-        <img src="/storage{{$producto->urlImg}}" width="250" height="200"/>
-    <input id="file" name="urlImg2" type="file" accept="image/*"/> <br>
+    <div class="form-row  mb-3">
+        <img src="/storage{{$producto->urlImg}}" width="250" height="200"/> <br>
+    </div>
+    <div class="form-row ">
+        
+        <input id="file" name="urlImg2" type="file" accept="image/*"/> <br>
     @error('urlImg')
         <small class="text-danger">{{$message}}</small>
     @enderror
@@ -48,7 +51,7 @@
     </div> --}}
 
     <div class="form-row">
-        <button type="submit" class="btn btn-primary btn-lgg" >Guardar</button>
+        <button type="submit" class="btn btn-primary btn-lgg mt-3" >Guardar</button>
     </div>
     
 

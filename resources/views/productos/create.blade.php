@@ -46,7 +46,7 @@
     </div> --}}
 
     <div class="form-row">
-        <button type="submit" class="btn btn-primary btn-lgg" >Guardar</button>
+        <button type="submit" class="btn btn-primary btn-lgg mt-3" >Guardar</button>
     </div>
     
 

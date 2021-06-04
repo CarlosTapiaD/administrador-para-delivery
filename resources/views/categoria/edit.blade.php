@@ -17,8 +17,10 @@
             <option value="0"{{$categoria->intVisible=='0' ? 'selected' :''}} >No</option>
           </select>
     </div>
-    <div class="form-row">
+    <div class="form-row bt-3">
         <img src="/storage{{$categoria->urlImg}}" width="250" height="200"/>
+    </div>
+    <div class="form-row bt-3">
     <input id="file" name="urlImg2" type="file" accept="image/*" value=""/> <br>
     @error('urlImg')
         <small class="text-danger">{{$message}}</small>
@@ -30,7 +32,7 @@
     </div> --}}
 
     <div class="form-row">
-        <button type="submit" class="btn btn-primary btn-lgg" >Guardar</button>
+        <button type="submit" class="btn btn-primary btn-lgg mt-3" >Guardar</button>
     </div>
     
 

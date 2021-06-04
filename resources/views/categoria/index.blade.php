@@ -2,7 +2,7 @@
 @section('content')
 
     <h1>Categorias</h1>
-    <a class="btn btn-success" href="{{route('categoria.create')}}">Nueva Categoria</a>
+    <a class="btn btn-success mb-3" href="{{route('categoria.create')}}">Nueva Categoria</a>
     @empty($categorias)
         <div class="alert-warning">Sin categorias</div>
     
@@ -28,7 +28,7 @@
                         <td>
                             <a class="btn btn-success" href="{{route('categoria.show',['categoria'=> $item->id])}}">Ver</a>
                             <a class="btn btn-success" href="{{route('categoria.edit',['categoria'=> $item->id])}}">Editar</a>
-                            <form method="POST" action="{{route('categoria.destroy',['categoria'=>$item->id])}}">
+                            <form method="POST" class="d-inline" action="{{route('categoria.destroy',['categoria'=>$item->id])}}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-link">Eliminar</button>
