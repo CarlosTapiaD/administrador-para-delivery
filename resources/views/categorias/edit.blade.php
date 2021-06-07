@@ -2,7 +2,7 @@
 @section('content')
 
 <h1>Crear Categoria</h1>
-<form method="POST" action="{{route('categoria.update',['categoria'=> $categoria->id])}}" enctype="multipart/form-data">
+<form method="POST" action="{{route('categorias.update',['categoria'=> $categoria->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="form-row">

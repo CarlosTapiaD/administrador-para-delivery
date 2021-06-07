@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class MainController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth');
-    }
+    // public function __construct(){
+    //     $this->middleware('auth');
+    // }
     //
 
     function index(){
-        return view('welcome');
+        return view('welcome')->with([
+            'productos'=>Producto::all()]);
     }
 }

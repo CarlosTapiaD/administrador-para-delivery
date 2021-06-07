@@ -33,8 +33,56 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @guest
+                            @if (Route::has('Register'))
+                            
+                            @endif
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('categorias.index') }}">Categorias</a>
+                        </li>
+                        @endguest
+                    </ul>
+
+                    <ul class="navbar-nav mr-auto">
+                        @guest
+                            @if (Route::has('Register'))
+                            
+                            @endif
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
+                        </li>
+                        @endguest
+                    </ul>
+
+                    <ul class="navbar-nav mr-auto">
+                        @guest
+                            @if (Route::has('Register'))
+                            
+                            @endif
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('pedidos.index') }}">Pedidos</a>
+                        </li>
+                        @endguest
+                    </ul>
+                    <ul class="navbar-nav mr-auto">
+                        @guest
+                        @if (Route::has('Register'))
+                        
+                        @endif
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('usuarios.index') }}">usuarios</a>
+                    </li>
+                    @endguest
+                    </ul>
+
+                    <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -69,7 +117,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                            @endguest
                     </ul>
                 </div>
             </div>

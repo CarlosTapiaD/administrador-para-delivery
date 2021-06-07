@@ -2,7 +2,7 @@
 @section('content')
 
 <h1>Crear Categoria</h1>
-<form method="POST" action="{{route('categoria.store')}}" enctype="multipart/form-data">
+<form method="POST" action="{{route('categorias.store')}}" enctype="multipart/form-data">
     @csrf
     <div class="form-row">
         <label for="strNombre">Nombre</label>

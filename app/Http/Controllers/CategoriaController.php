@@ -16,17 +16,17 @@ class CategoriaController extends Controller
     function index() {
         $categorias=Categoria::all()->sortByDesc("id");;
        // dd($categorias);
-        return view('categoria.index')->with(['categorias'=>$categorias]);
+        return view('categorias.index')->with(['categorias'=>$categorias]);
 
     }
     
     public function create(){
-        return view('categoria.create');
+        return view('categorias.create');
     }
     public function show(Categoria $categoria){
        // $categorias=Categoria::findOrFail($categoria);
        // dd($categorias);
-        return view('categoria.show')->with(['categorias'=>$categoria]); 
+        return view('categorias.show')->with(['categorias'=>$categoria]); 
     }
     public function store(Request $request){
         // if(request()->intVisible=='1'){
@@ -72,20 +72,20 @@ class CategoriaController extends Controller
          //session()->flash('success',"La categoria {$categoria->strNombre} se actualizo con exito");
 
         //return view('categoria.index');
-        return redirect()->route('categoria.index')->withSuccess("La categoria {$categoria->strNombre} se actualizo con exito");
+        return redirect()->route('categorias.index')->withSuccess("La categoria {$categoria->strNombre} se actualizo con exito");
     }
 
     
     public function edit(Categoria $categoria){
        // $categoria=Categoria::findOrFail($categoria);
-        return view('categoria.edit')->with(['categoria'=>$categoria]);
+        return view('categorias.edit')->with(['categoria'=>$categoria]);
     }
     public function destroy(Categoria $categoria){
         //$categoria=Categoria::findOrFail($categoria);
         $categoria->delete();
      //   session()->flash('success',"La categoria {$categoria->strNombre} se elimino con exito");
 
-        return redirect()->route('categoria.index')->withSuccess("La categoria {$categoria->strNombre} se elimino con exito");
+        return redirect()->route('categorias.index')->withSuccess("La categoria {$categoria->strNombre} se elimino con exito");
     }
     
     
