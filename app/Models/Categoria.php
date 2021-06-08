@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Producto;
 
 class Categoria extends Model
 {
@@ -20,4 +21,9 @@ class Categoria extends Model
         'intVisible',
         'urlImg',
     ];
+
+
+    public function producto(){
+        return $this->hasMany(Producto::class);
+    }
 }

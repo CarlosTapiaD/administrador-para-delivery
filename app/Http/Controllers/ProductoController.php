@@ -11,7 +11,7 @@ class ProductoController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    //
+    
     public function index(){
         $productos=Producto::all()->sortByDesc("id");
        // dd($productos);
@@ -75,6 +75,14 @@ class ProductoController extends Controller
         //session()->flash('success',"El Producto  {$producto->strNombre} se elimino con exito");
 
         return redirect()->route('productos.index')->withSuccess("El Producto  {$producto->strNombre} se elimino con exito");
+    }
+
+
+    // api
+    public function indexapi(){
+        $productos=Producto::all()->sortByDesc("id");
+       // dd($productos);
+        return $productos;
     }
     
 }

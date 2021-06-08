@@ -8,7 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 class RegisterController extends Controller
 {
     /*
@@ -23,6 +24,37 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    public function register(Request $request){
+
+        $this->validator($request->all())->validate();
+    
+        // event(new Registered($user = $this->create($request->all())));
+        event(new Registered($user =
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'strDireccion'=> $request->strDireccion,
+            'strCP'=> $request->strCP,
+            'strTipoUsuario'=> $request->strTipoUsuario,
+            'strTelefono'=> $request->strTelefono,
+            'strNota'=> $request->strNota,
+            'strEstado'=> $request->strEstado,
+        ])
+        ));
+    
+        $this->guard()->login($user);
+    
+    
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+        protected function registered(Request $request, $user){
+            $user->generateToken();
+    
+            return response()->json(['data' => $user->toArray()], 201);
+        }
 
     /**
      * Where to redirect users after registration.
@@ -76,4 +108,5 @@ class RegisterController extends Controller
             'strEstado'=> $data['strEstado'],
         ]);
     }
+    
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-
+use App\Models\Producto;
 class Pedido extends Model
 {
     use HasFactory, Notifiable;
@@ -24,4 +24,9 @@ class Pedido extends Model
         'strTP',
 
     ];
+
+    public function productos()
+    {
+     return $this->belongsToMany(Producto::class)->withPivot('cantidad'); 
+    }
 }

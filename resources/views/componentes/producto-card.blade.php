@@ -1,9 +1,15 @@
-@if ($producto->urlImg!="default")
-<td><img src="/storage{{$producto->urlImg}}" width="200" height="100"/></td>
+<div class="card"  >
+    @if ($producto->urlImg!="default")
+    <img class="card-img-top" src="/storage{{$producto->urlImg}}" />
     
 @else
-    <td>sin imagen</td>
+<img class="card-img-top" src="/storage{{$producto->urlImg}}" />
 @endif
-<h1>{{$producto->strNombre}}</h1>
-<p>{{$producto->strDescripcion}}</p>
-<h2>$ {{$producto->dcPrecio}}</h2>
+<div class="card-body">
+    <h4 class="card-title">{{$producto->strNombre}}</h4>
+    <h5 class="card-text">{{$producto->strDescripcion}}</h5>
+    <p class="card-text"> {{$producto->dcPrecio}}<p>
+        <a href="#" class="btn btn-primary">Comprar</a>
+</div>
+
+</div>

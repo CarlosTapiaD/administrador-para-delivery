@@ -13,7 +13,10 @@ class MainController extends Controller
     //
 
     function index(){
-        return view('welcome')->with([
-            'productos'=>Producto::all()]);
+        // return view('welcome')->with([
+        //     'productos'=>Producto::visible()->get()]);
+
+            return view('welcome')->with([
+                'productos'=>Producto::all()]);
     }
 }
