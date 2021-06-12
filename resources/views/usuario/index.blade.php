@@ -14,13 +14,13 @@
                         {{-- <th>id</th> --}}
                         <th>Nombre</th>
                         <th>Correo</th>
-                        <th>Direccion</th>
-                        <th>Codigo Postal</th>
+                        {{-- <th>Direccion</th> --}}
+                        {{-- <th>Codigo Postal</th> --}}
                         <th>Tipo Usuario</th>
-                        <th>Telefono</th>
+                        {{-- <th>Telefono</th>
                         <th>Nota</th>
                         <th>Estado</th>
-                        <th>Opciones</th>
+                        <th>Opciones</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -28,12 +28,12 @@
                     <tr>
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
-                        <td>{{$item->strDireccion}}</td>
-                        <td>{{$item->strCP}}</td>
+                        {{-- <td>{{$item->strDireccion}}</td>
+                        <td>{{$item->strCP}}</td> --}}
                         <td>{{$item->strTipoUsuario}}</td>
-                        <td>{{$item->strTelefono}}</td>
+                        {{-- <td>{{$item->strTelefono}}</td>
                         <td>{{$item->strNota}}</td>
-                        <td>{{$item->strEstado}}</td>
+                        <td>{{$item->strEstado}}</td> --}}
                         <td>{{$item->id}}</td>
                        
                     </tr>

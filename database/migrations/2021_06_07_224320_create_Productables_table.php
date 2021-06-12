@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePedidoProductoTable extends Migration
+class CreateProductablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePedidoProductoTable extends Migration
      */
     public function up()
     {
-        Schema::create('pedido_producto', function (Blueprint $table) {
-            $table->unsignedBigInteger('pedido_id');
+        Schema::create('productables', function (Blueprint $table) {
             $table->unsignedBigInteger('producto_id');
             $table->integer('cantidad')->unsigned();
+            $table->morphs('productable');
 
-            $table->foreign('pedido_id')->references('id')->on('pedidos');
             $table->foreign('producto_id')->references('id')->on('productos');
         });
     }

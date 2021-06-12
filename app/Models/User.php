@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Pedido;
+use App\Models\Pago;
+use App\Models\Image;
+
 
 class User extends Authenticatable
 {
@@ -21,13 +26,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'strDireccion',
-        'strCP',
         'strTipoUsuario',
-        'strTelefono',
-        'strNota',
-        'strEstado',
-        'api_token'
+        'api_token',
+        'admin_since',
 
     ];
 
@@ -40,6 +41,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         // 'api_token',
+       
     ];
 
     /**
@@ -50,12 +52,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $dates=[
+        'admin_since',
+    ];
+
+    
 
     public function generateToken()
     {
-        $this->api_token = Str::random(60);
-        $this->save();
-
-        return $this->api_token;
+         $this->api_token = Str::random(60);
+         $this->save();
+         return $this->api_token;
     }
+
+    public function pedidos(){
+        return $this->hasMany(Pedido::class);
+    }
+    public function pagos(){
+        return $this->hasManyThrough(Pago::class,Pedido::class);
+    }
+    public function image(){
+        return $this->morphOne(Image::class);
+    }
+    public function isAdmin(){
+        return $this->admin_since !=null && $this->admin_since->lessThanOrEqualTo(now());
+    }
+
 }

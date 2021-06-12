@@ -1,54 +1,57 @@
 @extends('layouts.app')
 @section('content')
 
-<h1>Crear usuarios</h1>
-<form method="POST" action="{{route('usuario.store')}}">
-    @csrf
-    <div class="form-row">
-        <label for="name">Nombre</label>
-        <input type="text" class="form-control" name="name" required>
-    </div>
-    <div class="form-row">
-        <label for="email">Correo</label>
-        <input type="text" class="form-control" name="email" required>
-    </div>
-    <div class="form-row">
-        <label for="password">Contrasena</label>
-        <input type="password" class="form-control" name="password" required>
-    </div>
-    <div class="form-row">
-        <label for="strDireccion">Direccion</label>
-        <input type="text" class="form-control" name="strDireccion" required>
-    </div>
-    <div class="form-row">
-        <label for="strCP">Codigo Postal</label>
-        <input type="text" class="form-control" name="strCP" required>
-    </div>
-    <div class="form-row">
-        <label for="strEstado">Estado</label>
-        <input type="text" class="form-control" name="strEstado" required>
-    </div>
-    <div class="form-row">
-        <label for="strTipoUsuario">Tipo Usuario</label>
-        <select name="strTipoUsuario" class="custom-select">
-            <option value="admin"selected>Administrador</option>
-            <option value="conductor" >Conductor</option>
-          </select>
-    </div>
-    <div class="form-row">
-        <label for="strTelefono">Telefomo</label>
-        <input type="text" class="form-control" name="strTelefono" required>
-    </div>
-    <div class="form-row">
-        <label for="strNota">Nota</label>
-        <input type="text" class="form-control" name="strNota" required>
-    </div>
-    <div class="form-row">
-        <button type="submit" class="btn btn-primary btn-lgg">Guardar</button>
-    </div>
+    <h1>Confirmar Pedido</h1>
+
+    <h4 class="text-center"> <strong>Total {{$carrito->total}}</strong></h4>
+    <div class=" text-center mb-3"> 
+        <form class="d-inline" method="POST" action="{{route('pedidos.store')}}">
+            @csrf
+            <button type="submit" class="btn btn-success">Confirmar orden</button>
+    </form> </div>
+    @empty($carrito)
+        <div class="alert-warning">Sin productos</div>
     
-</form>
+    @else
+
+        <div class = "table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        {{-- <th>id</th> --}}
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($carrito->productos as $item)
+                    <tr>
+                        @if ($item->urlImg!="default")
+                        <td><img src="/storage{{$item->urlImg}}" width="150" height="100"/></td>
+                            
+                        @else
+                            <td>sin imagen</td>
+                        @endif
+                        <td>{{$item->strNombre}}</td>
+                        <td>{{$item->dcPrecio}}</td>
+                        <td>{{$item->pivot->cantidad}}</td>
+                        <td>{{$item->total}}</td>
+                        
+                        {{-- <th><img src="storage\app\{{$item->urlImg}}" alt="" width="100" height="100"></th> --}}
+                       
+                    </tr>
+                    @endforeach
 
 
+                </tbody>
+            </table>
+           
+
+        </div>
+    @endempty
 
 @endsection
+    

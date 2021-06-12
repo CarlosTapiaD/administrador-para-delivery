@@ -14,7 +14,7 @@ class CategoriaController extends Controller
     }
     
     function index() {
-        $categorias=Categoria::all()->sortByDesc("id");;
+        $categorias=Categoria::all()->sortByDesc("id");
        // dd($categorias);
         return view('categorias.index')->with(['categorias'=>$categorias]);
 
@@ -88,5 +88,13 @@ class CategoriaController extends Controller
         return redirect()->route('categorias.index')->withSuccess("La categoria {$categoria->strNombre} se elimino con exito");
     }
     
+    // api
+
+    function indexapi() {
+        $categorias=Categoria::all()->sortByDesc("id");
+       // dd($categorias);
+       return response()->json($categorias, 413);
+
+    }
     
 }

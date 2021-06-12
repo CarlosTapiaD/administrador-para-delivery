@@ -25,7 +25,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    public function register(Request $request){
+    public function registerapi(Request $request){
 
         $this->validator($request->all())->validate();
     
@@ -35,12 +35,7 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'strDireccion'=> $request->strDireccion,
-            'strCP'=> $request->strCP,
             'strTipoUsuario'=> $request->strTipoUsuario,
-            'strTelefono'=> $request->strTelefono,
-            'strNota'=> $request->strNota,
-            'strEstado'=> $request->strEstado,
         ])
         ));
     
@@ -53,7 +48,7 @@ class RegisterController extends Controller
         protected function registered(Request $request, $user){
             $user->generateToken();
     
-            return response()->json(['data' => $user->toArray()], 201);
+            return response()->json(['user' => $user->toArray()], 201);
         }
 
     /**
@@ -100,12 +95,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'strDireccion'=> $data['strDireccion'],
-            'strCP'=> $data['strCP'],
             'strTipoUsuario'=> $data['strTipoUsuario'],
-            'strTelefono'=> $data['strTelefono'],
-            'strNota'=> $data['strNota'],
-            'strEstado'=> $data['strEstado'],
         ]);
     }
     

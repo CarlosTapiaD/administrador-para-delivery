@@ -16,7 +16,7 @@
         <label for="password">Contrasena</label>
         <input type="password" class="form-control" name="password" required>
     </div>
-    <div class="form-row">
+    {{-- <div class="form-row">
         <label for="strDireccion">Direccion</label>
         <input type="text" class="form-control" name="strDireccion" required>
     </div>
@@ -27,7 +27,7 @@
     <div class="form-row">
         <label for="strEstado">Estado</label>
         <input type="text" class="form-control" name="strEstado" required>
-    </div>
+    </div> --}}
     <div class="form-row">
         <label for="strTipoUsuario">Tipo Usuario</label>
         <select name="strTipoUsuario" class="custom-select">
@@ -35,14 +35,14 @@
             <option value="conductor" >Conductor</option>
           </select>
     </div>
-    <div class="form-row">
+    {{-- <div class="form-row">
         <label for="strTelefono">Telefomo</label>
         <input type="text" class="form-control" name="strTelefono" required>
-    </div>
-    <div class="form-row">
+    </div> --}}
+    {{-- <div class="form-row">
         <label for="strNota">Nota</label>
         <input type="text" class="form-control" name="strNota" required>
-    </div>
+    </div> --}}
     <div class="form-row">
         <button type="submit" class="btn btn-primary btn-lgg">Guardar</button>
     </div>

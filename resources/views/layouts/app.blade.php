@@ -29,9 +29,13 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
+                
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+
+                    
                     <ul class="navbar-nav mr-auto">
                         @guest
                             @if (Route::has('Register'))
@@ -78,6 +82,7 @@
                     </li>
                     @endguest
                     </ul>
+                    
 
                     <ul class="navbar-nav mr-auto">
 
@@ -119,6 +124,14 @@
                             </li>
                             @endguest
                     </ul>
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('carritos.index') }}">
+                                @inject('carritoService', 'App\Providers\CarritoService')
+                                Carrito ({{$carritoService->contarProducto()}})</a>
+                        </li>
+                </ul>
                 </div>
             </div>
         </nav>

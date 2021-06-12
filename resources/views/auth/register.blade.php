@@ -62,7 +62,7 @@
                         </div>
                         {{-- aqui empieza lo modificado --}}
                         {{-- strDireccion --}}
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="strDireccion" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
 
                             <div class="col-md-6">
@@ -74,9 +74,9 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         {{--  strCP--}}
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="strCP" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Postal') }}</label>
 
                             <div class="col-md-6">
@@ -88,7 +88,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- strTipoUsuario --}}
                         <div class="form-group row">
                             <label for="strTipoUsuario" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Usuario') }}</label>
@@ -109,7 +109,7 @@
                         </div>
                         {{-- strTelefono --}}
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="strDireccion" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
 
                             <div class="col-md-6">
@@ -121,11 +121,11 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- strEstado --}}
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="strEstado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
                             <div class="col-md-6">
@@ -137,11 +137,11 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- strNota --}}
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="strNota" class="col-md-4 col-form-label text-md-right">{{ __('Nota') }}</label>
 
                             <div class="col-md-6">
@@ -153,7 +153,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         {{--  --}}
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

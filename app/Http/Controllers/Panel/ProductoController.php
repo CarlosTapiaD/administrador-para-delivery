@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 class ProductoController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['indexapi','indexapiXcategoria']);
     }
     
     public function index(){
@@ -82,7 +83,12 @@ class ProductoController extends Controller
     public function indexapi(){
         $productos=Producto::all()->sortByDesc("id");
        // dd($productos);
-        return $productos;
+        // return $productos;
+        return response()->json($productos, 413);
+    }
+    public function indexapiXcategoria( $categoria){
+        $productos=Producto::where('categoria_id',$categoria)->get();
+        return response()->json($productos, 413);
     }
     
 }

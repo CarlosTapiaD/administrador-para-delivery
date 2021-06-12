@@ -15,14 +15,13 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->integer('intFolio');
-            $table->string('strNota');
+            $table->string('strNota')->default('');
             $table->string('strEstatus');
-            $table->string('strReferencia');
-            $table->string('strTP');//tipo pago
+            $table->string('strReferencia')->default('');
+            $table->string('strTP')->default('Efectivo');//tipo pago
             $table->timestamps();
-            $table->unsignedBigInteger('usuario_id');
-    $table->foreign('usuario_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

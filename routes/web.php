@@ -21,7 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::resource('usuarios', 'UsuarioController');
 Route::resource('categorias', 'CategoriaController');
 Route::resource('productos', 'ProductoController');
-Route::resource('pedidos','PedidoController');
+Route::resource('productos.carrito', 'ProductoCarritoController')->only(['store','destroy']);
+Route::resource('carritos', 'CarritoController')->only(['index']);
+Route::resource('pedidos','PedidoController')->only(['create','store','index']);;
+Route::resource('pedidos.pagos','PedidoPagoController')->only(['create','store']);;
 Route::get('/','MainController@index')->name('main.index');
 // //usuarios
 // Route::get('usuario','UsuarioController@index')->name('usuario.index');

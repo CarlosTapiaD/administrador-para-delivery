@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Categoria;
 use App\Models\Pedido;
+use App\Models\Carrito;
 class Producto extends Model
 {  
     use HasFactory, Notifiable;
@@ -31,7 +32,15 @@ class Producto extends Model
     }
     public function pedidos()
     {
-        return $this->belongsToMany(Pedido::class)->withPivot('cantidad'); 
+        return $this->morphedByMany(Pedido::class,'productable')->withPivot('cantidad'); 
+    }
+    public function carritos()
+    {
+     return $this->morphedByMany(Carrito::class,'productable')->withPivot('cantidad'); 
+    }
+
+    public function getTotalAttribute(){
+        return $this->pivot->cantidad * $this->dcPrecio;
     }
 
     public function scopeVisible($query){
