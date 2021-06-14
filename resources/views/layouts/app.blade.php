@@ -34,21 +34,18 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @if (optional(auth()->user())->isAdmin())
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('panel') }}">Panel</a>
+                            </li>
+                        </ul>
+                        
+                    @endif
 
                     
-                    <ul class="navbar-nav mr-auto">
-                        @guest
-                            @if (Route::has('Register'))
-                            
-                            @endif
-                        @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('categorias.index') }}">Categorias</a>
-                        </li>
-                        @endguest
-                    </ul>
-
-                    <ul class="navbar-nav mr-auto">
+                    
+                    {{-- <ul class="navbar-nav mr-auto">
                         @guest
                             @if (Route::has('Register'))
                             
@@ -86,7 +83,7 @@
 
                     <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                    </ul> --}}
                     
 
                     <!-- Right Side Of Navbar -->
@@ -114,7 +111,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Salir') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

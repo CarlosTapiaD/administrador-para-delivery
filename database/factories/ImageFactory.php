@@ -22,7 +22,13 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'path'=>"/img/productos/default.jpg",
         ];
+    }
+
+    public function user(){
+        return $this->state([
+            'path'=>"/img/user/default.png"
+        ]); 
     }
 }

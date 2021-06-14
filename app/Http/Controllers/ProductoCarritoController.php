@@ -37,6 +37,8 @@ class ProductoCarritoController extends Controller
         return redirect()->back()->cookie($cookies);
     }
 
+    
+
     // public function getFromCookieOrCreate(){
     //     $cardId=Cookie::get('cart');
     //     $cart =Carrito::find($cardId);

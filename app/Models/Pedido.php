@@ -42,9 +42,7 @@ class Pedido extends Model
     {
      return $this->morphToMany(Producto::class,'productable')->withPivot('cantidad'); 
     }
-    public function images(){
-        return $this->morphMany(Image::class,'imageable');
-    }
+    
     public function getTotalAttribute(){
         return $this->productos->pluck('total')->sum();
     }

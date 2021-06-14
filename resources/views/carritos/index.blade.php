@@ -14,7 +14,7 @@
        <a class="btn btn-success mb-3"  href="{{route('pedidos.create')}}">Enviar Pedido</a>
         <div class="row">
             @foreach ($carrito->productos as  $producto)
-                <div class=" col-lg-4 col-md-6 ms-12">
+                <div class=" col-lg-4 col-md-6 ms-12 m-3">
                    @include('componentes.producto-card')
                 </div>
             @endforeach

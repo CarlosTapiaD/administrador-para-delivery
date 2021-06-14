@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/','PanelController@index')->name('panel');
 
-// Route::resource('usuarios', 'UsuarioController');
+ Route::resource('usuarios', 'UsuarioController');
 // Route::resource('categorias', 'CategoriaController');
 Route::resource('productos', 'ProductoController');
+Route::resource('categorias', 'CategoriaController');
+
 // Route::resource('productos.carrito', 'ProductoCarritoController')->only(['store','destroy']);
 // Route::resource('carritos', 'CarritoController')->only(['index']);
 // Route::resource('pedidos','PedidoController')->only(['create','store','index']);;

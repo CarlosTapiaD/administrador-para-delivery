@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
-use App\Models\Producto;
+//use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Scopes\AvailableScope;
+use App\Models\PanelProducto;
+use App\Models\Producto;
 class ProductoController extends Controller
 {
     public function __construct(){
@@ -14,7 +17,7 @@ class ProductoController extends Controller
     }
     
     public function index(){
-        $productos=Producto::all()->sortByDesc("id");
+        $productos=PanelProducto::without('imageable')->get()->sortByDesc("id");
        // dd($productos);
         return view('productos.index')->with(['productos'=>$productos]);
     }
@@ -25,7 +28,8 @@ class ProductoController extends Controller
 
     public function show(Producto $producto){
         // $productos=Producto::findOrFail($producto);
-       // dd($productos);
+        //$producto->with('imageable');
+        //dd($producto);
         return view('productos.show')->with(['productos'=>$producto]);
     }
 
@@ -39,7 +43,7 @@ class ProductoController extends Controller
         $request->merge([
             'urlImg' => $name,
         ]);
-        $producto= Producto::create($request->all());
+        $producto= PanelProducto::create($request->all());
         //session()->flash('success',"El producto {$producto->strNombre} se creo con exito");
 
        // return $usaurio;
@@ -47,7 +51,7 @@ class ProductoController extends Controller
 
     }
 
-    public function update(Producto $producto){
+    public function update(PanelProducto $producto){
         // $producto=Producto::findOrFail($producto);
         // dd(request()->file('urlImg2'));
          if (request()->file('urlImg2')!=null) {
@@ -65,12 +69,12 @@ class ProductoController extends Controller
           return redirect()->route('productos.index')->withSuccess("El producto {$producto->strNombre} se actualizo con exito");
     }
     
-    public function edit(Producto $producto){
+    public function edit(PanelProducto $producto){
         // $producto=Producto::findOrFail($producto);
         return view('productos.edit')->with(['producto'=>$producto]);
 
     }
-    public function destroy(Producto $producto){
+    public function destroy(PanelProducto $producto){
         // $producto=Producto::findOrFail($producto);
         $producto->delete();
         //session()->flash('success',"El Producto  {$producto->strNombre} se elimino con exito");
@@ -81,13 +85,13 @@ class ProductoController extends Controller
 
     // api
     public function indexapi(){
-        $productos=Producto::all()->sortByDesc("id");
+        $productos=PanelProducto::all()->sortByDesc("id");
        // dd($productos);
         // return $productos;
         return response()->json($productos, 413);
     }
     public function indexapiXcategoria( $categoria){
-        $productos=Producto::where('categoria_id',$categoria)->get();
+        $productos=PanelProducto::where('categoria_id',$categoria)->get();
         return response()->json($productos, 413);
     }
     

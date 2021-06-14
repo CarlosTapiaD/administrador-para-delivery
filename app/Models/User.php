@@ -72,7 +72,7 @@ class User extends Authenticatable
         return $this->hasManyThrough(Pago::class,Pedido::class);
     }
     public function image(){
-        return $this->morphOne(Image::class);
+        return $this->morphOne(Image::class,'imageable');
     }
     public function isAdmin(){
         return $this->admin_since !=null && $this->admin_since->lessThanOrEqualTo(now());

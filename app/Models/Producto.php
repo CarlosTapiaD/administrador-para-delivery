@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Categoria;
 use App\Models\Pedido;
 use App\Models\Carrito;
+use App\Scopes\AvailableScope;
+use App\Models\Image;
 class Producto extends Model
 {  
     use HasFactory, Notifiable;
@@ -17,6 +19,10 @@ class Producto extends Model
      *
      * @var array
      */
+
+    protected $with=[
+        'images',
+    ];
     protected $fillable = [
         'strNombre',
         'intVisible',
@@ -26,6 +32,12 @@ class Producto extends Model
         'urlImg',
 
     ];
+    
+    protected static function booted()
+    {
+        static::addGlobalScope(new AvailableScope);
+    }
+    
 
     public function categoria(){
         return $this->belongsTo(Categoria::class,'categoria_id');
@@ -46,4 +58,10 @@ class Producto extends Model
     public function scopeVisible($query){
         $query->where('intVisible',1);
     }
+
+    public function images(){
+        return $this->morphMany(Image::class,'imageable');
+    }
+
+    
 }
