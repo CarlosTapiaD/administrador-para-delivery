@@ -24,7 +24,12 @@
                     <tr>
                         <td><img src="/storage{{$item->urlImg}}" width="150" height="100"/></td>
                         <td>{{$item->strNombre}}</td>
-                        <td>{{$item->intVisible}}</td>
+                        @if ($item->intVisible==0)
+                            <td>No</td>
+                        @else
+                            <td>SI</td>
+                        @endif
+                        
                         <td>
                             <a class="btn btn-success" href="{{route('categorias.show',['categoria'=> $item->id])}}">Ver</a>
                             <a class="btn btn-success" href="{{route('categorias.edit',['categoria'=> $item->id])}}">Editar</a>

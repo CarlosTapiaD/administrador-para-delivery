@@ -8,9 +8,15 @@ use Illuminate\Support\Facades\Cookie;
 
 class CarritoService 
 {
+    protected $cookieName;
+    protected $cookieExpiration;
 
+    public function __construct(){
+        $this->cookieName= config('cart.cookie.name');    
+        $this->cookieExpiration= config('cart.cookie.expiration');
+    }
     public function getFromCookie(){
-        $cardId=Cookie::get('cart');
+        $cardId=Cookie::get($this->cookieName);
         $cart =Carrito::find($cardId);
         return $cart;
     }
@@ -21,7 +27,7 @@ class CarritoService
     }
     
     public function makeCookie(Carrito $cart){
-        return Cookie::make('cart',$cart->id,7 * 24 * 60);
+        return Cookie::make($this->cookieName,$cart->id,$this->cookieExpiration);
     }
 
     public function contarProducto(){

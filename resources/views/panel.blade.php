@@ -10,7 +10,16 @@
 
                 <div class="card-body">
                     <div class="list-group">
+                        <a href="{{route('categorias.index')}}">Categorias</a>
+                    </div>
+                    <div class="list-group">
                         <a href="{{route('productos.index')}}">Productos</a>
+                    </div>
+                    <div class="list-group">
+                        <a href="{{route('pedidos.index')}}">Pedidos</a>
+                    </div>
+                    <div class="list-group">
+                        <a href="{{route('usuarios.index')}}">Usuarios</a>
                     </div>
                 </div>
             </div>

@@ -21,8 +21,8 @@ class PedidoController extends Controller
     //     $this->middleware('auth');
     // }
     public function index(){
-        $pedidos=Pedido::all();
-      //  dd($pedidos);
+        $pedidos=Pedido::all()->sortByDesc("id");
+       
         
         return view('pedido.index')->with(['pedidos'=>$pedidos]);
     }
@@ -31,7 +31,7 @@ class PedidoController extends Controller
         if (!isset($carrito) || $carrito->productos->isEmpty()) {
             return redirect()->back()->withError('El carrito esta vacio');
         }
-
+ 
         return view('pedido.create')->with(['carrito'=>$carrito]);
     }
     public function show($pedidos){
@@ -40,7 +40,8 @@ class PedidoController extends Controller
         return view('pedido.show')->with(['pedidos'=>$pedidos]);
     }
     public function store(Request $request){
-        $user = $request->user();
+        return DB::transaction(function () use($request){
+            $user = $request->user();
         $pedido =$user->pedidos()->create([
             "strEstatus"=>"pendiente"
         ]);
@@ -52,7 +53,8 @@ class PedidoController extends Controller
         ($carritoProductosConCantidad);
         $pedido->productos()->attach($carritoProductosConCantidad->toArray());
         return redirect()->route('pedidos.pagos.create',['pedido'=>$pedido]);
-    }
+        },5);
+    } 
     public function update(){}
     public function destroy(){}
     public function edit(){}

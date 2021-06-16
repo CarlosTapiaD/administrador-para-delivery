@@ -6,6 +6,7 @@ use App\Models\Pago;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Providers\CarritoService;
+use Illuminate\Support\Facades\DB;
 
 class PedidoPagoController extends Controller
 {
@@ -31,17 +32,21 @@ class PedidoPagoController extends Controller
      */
     public function store(Request $request, Pedido $pedido)
     {
-        //funcion de pago ()
+       
+        return  DB::transaction(function () use($request,$pedido){
+             //funcion de pago ()
+            $this->carritoService->getFromCookie()->productos()->detach();
+            $pedido->pago()->create([
+                'monto' =>$pedido->total,
+                'fecha_pago'=>now(),
+            ]);
+    
+            $pedido->strEstatus='Pagado';
+            $pedido->save();
+            return redirect()->route('main.index')->withSucces('Pago exitoso');
+        });
 
-        $this->carritoService->getFromCookie()->productos()->detach();
-        $pedido->pago()->create([
-            'monto' =>$pedido->total,
-            'fecha_pago'=>now(),
-        ]);
-
-        $pedido->strEstatus='Pagado';
-        $pedido->save();
-        return redirect()->route('main.index')->withSucces('Pago exitoso');
+       
         
     }
 

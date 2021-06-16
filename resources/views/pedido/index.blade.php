@@ -15,7 +15,7 @@
                     <tr>
                         {{-- <th>id</th> --}}
                         <th>intFolio</th>
-                        <th>Nota</th>
+                        <th>Direccion</th>
                         <th>Estatus</th>
                         <th>Referencia</th>
                         <th>Cliente</th>
@@ -26,11 +26,12 @@
                 <tbody>
                     @foreach ($pedidos as $item)
                     <tr>
-                        <td>{{$item->intFolio}}</td>
-                        <td>{{$item->strNota}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->user->direccion
+                            }}</td>
                         <td>{{$item->strEstatus}}</td>
                         <td>{{$item->strReferencia}}</td>
-                        <td>{{$item->usuario_id}}</td>
+                        <td>{{$item->user->name}}</td>
                         <td>{{$item->strTP}}</td>
                         <td>opciones </td>
                        

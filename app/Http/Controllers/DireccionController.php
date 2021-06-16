@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Direccion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DireccionController extends Controller
 {
@@ -14,7 +15,8 @@ class DireccionController extends Controller
      */
     public function index()
     {
-        //
+        $user = request()->user();
+        return view('direcciones.index')->with(['user'=>$user]);
     }
 
     /**
@@ -24,7 +26,8 @@ class DireccionController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('direcciones.create');
     }
 
     /**
@@ -35,6 +38,12 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
+        return DB::transaction(function () use($request){
+            $user = $request->user();
+            $direccion=$user->direccion()->create($request->all());
+            $direccion->save();
+            return redirect()->route('direccions.index')->withSuccess("La direccion {$direccion->calles} se agrego con exito");
+        });
         //
     }
 
@@ -57,7 +66,7 @@ class DireccionController extends Controller
      */
     public function edit(Direccion $direccion)
     {
-        //
+        return view('direcciones.edit')->with(['direccion'=>$direccion]);
     }
 
     /**
@@ -69,7 +78,9 @@ class DireccionController extends Controller
      */
     public function update(Request $request, Direccion $direccion)
     {
-        //
+        $direccion->update(request()->all());
+
+       return redirect()->route('direccions.index')->withSuccess("La direccion {$direccion->calles} se actualizo con exito");
     }
 
     /**
@@ -80,6 +91,7 @@ class DireccionController extends Controller
      */
     public function destroy(Direccion $direccion)
     {
-        //
+        $direccion->delete();
+        return redirect()->back();
     }
 }

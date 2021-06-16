@@ -25,31 +25,32 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    public function registerapi(Request $request){
+    // public function registerapi(Request $request){
 
-        $this->validator($request->all())->validate();
-    
-        // event(new Registered($user = $this->create($request->all())));
-        event(new Registered($user =
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'strTipoUsuario'=> $request->strTipoUsuario,
-        ])
-        ));
-    
-        $this->guard()->login($user);
-    
-    
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
-    }
-        protected function registered(Request $request, $user){
-            $user->generateToken();
-    
-            return response()->json(['user' => $user->toArray()], 201);
-        }
+    //     $this->validator($request->all())->validate();
+
+    //     // event(new Registered($user = $this->create($request->all())));
+    //     event(new Registered($user =
+    //     User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password),
+    //         'strTipoUsuario'=> $request->strTipoUsuario,
+    //     ])
+    //     ));
+
+    //     $this->guard()->login($user);
+
+
+    //     // return $this->registered($request, $user)
+    //     //                 ?: redirect($this->redirectPath());
+    //     return redirect($this->redirectPath());
+    // }
+    //     protected function registered(Request $request, $user){
+    //         $user->generateToken();
+
+    //         return response()->json(['user' => $user->toArray()], 201);
+    //     }
 
     /**
      * Where to redirect users after registration.
@@ -94,9 +95,10 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            
+            'password' => $data['password'], //Hash::make($data['password']),
+
         ]);
+
     }
-    
+
 }

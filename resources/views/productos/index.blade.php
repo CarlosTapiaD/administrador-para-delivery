@@ -33,13 +33,18 @@
                             <td>sin imagen</td>
                         @endif
                         <td>{{$item->strNombre}}</td>
-                        <td>{{$item->intVisible}}</td>
+                        @if ($item->intVisible==0)
+                          <td>No</td>
+                        @else
+                            <td>Si</td>
+                        @endif
+                        
                         <td>{{$item->strDescripcion}}</td>
                         <td>{{$item->dcPrecio}}</td>
                         
-                        <td>{{$item->categoria_id}}</td>
+                        <td>{{$item->categoria->strNombre}}</td>
                         <td>
-                            <a class="btn btn-success" href="{{route('productos.show',['producto'=> $item->id])}}">Ver</a>
+                            {{-- <a class="btn btn-success" href="{{route('productos.show',['producto'=> $item->id])}}">Ver</a> --}}
                             <a class="btn btn-success" href="{{route('productos.edit',['producto'=> $item->id])}}">Editar</a>
                         
                             <form method="POST" class="d-inline" action="{{route('productos.destroy',['producto'=>$item->id])}}">

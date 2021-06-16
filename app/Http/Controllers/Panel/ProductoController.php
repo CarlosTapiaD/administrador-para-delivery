@@ -18,7 +18,7 @@ class ProductoController extends Controller
     
     public function index(){
         $productos=PanelProducto::without('imageable')->get()->sortByDesc("id");
-       // dd($productos);
+        //dd($productos);
         return view('productos.index')->with(['productos'=>$productos]);
     }
 

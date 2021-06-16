@@ -28,20 +28,28 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item"> Precio ${{$producto->dcPrecio}} MXN</li>
         
+       
+          @if (!isset($carrito))
+            <form class="" method="POST" action="{{route('productos.carrito.store',['producto'=>$producto->id])}}">
+          <li class="list-group-item"><input class="text-form" type="number" name="cantidad" value="1" id="cantidad{{$producto->id}}">
+          <input type="button"  class="btn btn-success "onclick="sumar('cantidad{{$producto->id}}')" value="+">
+          <input type="button" class="btn btn-danger" onclick="restar('cantidad{{$producto->id}}')" value="-">
+          </li>
+          @endif
       
       
-        @if (isset($carrito))
+       @if (isset($carrito))
         <li class="list-group-item">Cantidad {{$producto->pivot->cantidad}} Precio $ {{$producto->total}}</li>
 
             <form class="d-inline" method="POST" action="{{route  ('productos.carrito.destroy',['producto'=>$producto->id,'carrito'=>$carrito->id])}}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-warning">Eliminar</button>
+                <button type="submit" class="btn btn-warning m-3">Eliminar</button>
             </form>
         @else
-        <form class="d-inline m-3 " method="POST" action="{{route('productos.carrito.store',['producto'=>$producto->id])}}">
+        
             @csrf
-            <button type="submit" class="btn btn-success">Agregar a carrito</button>
+            <button type="submit" class="btn btn-success m-3">Agregar a carrito</button>
     </form>
         @endif
 
@@ -50,3 +58,18 @@
     </ul>
 
 </div>
+
+<script>
+  
+  sumar=(data)=>{
+    document.getElementById(data).value++;
+};
+restar=(data)=>{
+  
+  if(document.getElementById(data).value>0){
+    document.getElementById(data).value--;
+   
+  }
+};
+  
+</script>

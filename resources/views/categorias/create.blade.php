@@ -18,6 +18,7 @@
     </div>
     <div class="form-row">
     <input id="file" name="urlImg2" type="file" accept="image/*"/> <br>
+    <img id="img" src="" alt="" height="300"    width="500" hidden>
     @error('urlImg')
         <small class="text-danger">{{$message}}</small>
     @enderror
@@ -36,6 +37,13 @@
     
 </form>
 
+<script>    
+document.getElementById('file').addEventListener('change',function(){
+  //  alert();
+  document.getElementById('img').src=URL.createObjectURL(document.getElementById('file').files[0]);
+  document.getElementById('img').hidden=false;
+})
+</script>
 
 
 @endsection

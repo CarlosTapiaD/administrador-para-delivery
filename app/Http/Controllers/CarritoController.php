@@ -20,6 +20,11 @@ class CarritoController extends Controller
      */
     public function index()
     {
+        $user = request()->user();
+        if ($user->direccion==null) {
+            return redirect()->route('direccions.create')-> withErrors('Agrega una direccion para entrar al carrito');
+        }
+
         $carrito= $this->carritoService->getFromCookieOrCreate();
         return view('carritos.index')->with([
             'carrito'=>$carrito,

@@ -7,6 +7,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Providers\CarritoService;
+use Illuminate\Support\Facades\DB;
 
 class ProductoCarritoController extends Controller
 {
@@ -20,12 +21,13 @@ class ProductoCarritoController extends Controller
 
     public function store(Request $request, Producto $producto)
     {
-        $cart=$this->carritoService->getFromCookieOrCreate();
-       // $cart= Carrito::create(); 
-        $cantidad=$cart->productos()->find($producto->id)->pivot->cantidad ?? 0;
-        $cart->productos()->syncWithoutDetaching([$producto->id=>['cantidad'=>$cantidad + 1]]);  
-        $cookie =$this->carritoService->makeCookie($cart);//;Cookie::make('cart',$cart->id,7 * 24 * 60);
-        return redirect()->back()->cookie($cookie);
+        //return DB::transaction(function () use($request,$producto){
+            $cart=$this->carritoService->getFromCookieOrCreate();
+            $cantidad=$cart->productos()->find($producto->id)->pivot->cantidad ?? 0;
+            $cart->productos()->syncWithoutDetaching([$producto->id=>['cantidad'=>$cantidad + intval($request->cantidad)]]);  
+            $cookie =$this->carritoService->makeCookie($cart);
+            return redirect()->back()->cookie($cookie);
+      //  });
     }
 
    

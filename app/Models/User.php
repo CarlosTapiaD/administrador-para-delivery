@@ -11,9 +11,10 @@ use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Pago;
 use App\Models\Image;
+use App\Models\Direccion;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -41,7 +42,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         // 'api_token',
-       
+
     ];
 
     /**
@@ -56,7 +57,7 @@ class User extends Authenticatable
         'admin_since',
     ];
 
-    
+
 
     public function generateToken()
     {
@@ -77,5 +78,13 @@ class User extends Authenticatable
     public function isAdmin(){
         return $this->admin_since !=null && $this->admin_since->lessThanOrEqualTo(now());
     }
+
+    public function direccion(){
+         return $this->hasOne(Direccion::class);
+    }
+    public function setPasswordAttribute($password){
+        $this->attributes['password']= bcrypt($password);
+    }
+
 
 }
